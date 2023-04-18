@@ -2,7 +2,7 @@ import { LoginPic } from "../assets/images/index";
 import TextField from "@mui/material/TextField";
 import { Controller, useForm } from "react-hook-form";
 import { LoginForm, loginFormYup } from "../validators/login";
-import { LogoApp } from "../component/Logo";
+import { LogoApp } from "../component/LogoApp";
 
 export function LoginPage() {
   const { control, handleSubmit } = useForm<LoginForm>({
