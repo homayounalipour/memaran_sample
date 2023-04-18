@@ -6,6 +6,23 @@ export const validator = {
       ? Yup.string().email("error.email").required("error.Required")
       : Yup.string().email("error.email"),
 
+  string: (required: boolean = false, message: string = "error.Required") =>
+    required ? Yup.string().required(message) : Yup.string(),
+
+  url: (required: boolean = false, message: string = "error.Required") =>
+    required ? Yup.string().required(message) : Yup.string(),
+
+  price: (required = true) =>
+    required
+      ? Yup.string()
+          .test("type", "error.priceNumber", (value) => !isNaN(value as any))
+          .required("error.priceRequired")
+      : Yup.string().test(
+          "type",
+          "error.priceNumber",
+          (value) => !isNaN(value as any)
+        ),
+
   password: (required = true) =>
     required
       ? Yup.string()
