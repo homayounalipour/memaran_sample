@@ -3,6 +3,7 @@ import { Hr } from "../kit/Hr";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import Chip from "@mui/material/Chip";
 import Rating from "@mui/material/Rating";
+import { ProductDetailModal } from "./ProductDetailModal";
 
 export type CardShopProps = {
   id: string;
@@ -54,6 +55,7 @@ const cardsDetails = [
 export function CardShop() {
   return (
     <>
+      <ProductDetailModal />
       {cardsDetails &&
         cardsDetails.map((cardDetail) => (
           <div className="pb-2">

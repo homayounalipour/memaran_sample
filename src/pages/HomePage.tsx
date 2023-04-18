@@ -1,16 +1,14 @@
-import { Header } from "../component/Header";
 import { Banner } from "../assets/images/index";
 import { HiSortDescending } from "react-icons/hi";
 import { BsArrowUp } from "react-icons/bs";
 import { BsArrowDown } from "react-icons/bs";
-import { Divider } from "@mui/material";
 import { Hr } from "../kit/Hr";
 import { CardShop } from "../component/CardShop";
+import { LayOut } from "../kit/LayOut";
 
 export function HomePage() {
   return (
-    <div>
-      <Header />
+    <LayOut>
       <div className="pt-3">
         <img src={Banner} alt="Banner" />
       </div>
@@ -36,6 +34,6 @@ export function HomePage() {
           <CardShop />
         </div>
       </div>
-    </div>
+    </LayOut>
   );
 }
