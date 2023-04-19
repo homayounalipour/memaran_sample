@@ -4,6 +4,7 @@ import { LoginPage } from "../pages/LoginPage";
 import { HomePage } from "../pages/HomePage";
 import { AddProduct } from "../pages/AddProduct";
 import { ShoppingCard } from "../pages/ShoppingCard";
+import { Payment } from "../pages/Payment";
 
 export const routers = createBrowserRouter([
   {
@@ -21,5 +22,9 @@ export const routers = createBrowserRouter([
   {
     path: "/Shopping-card",
     element: <ShoppingCard />,
+  },
+  {
+    path: "/Payment",
+    element: <Payment />,
   },
 ]);
