@@ -8,6 +8,7 @@ export type AddProductForm = {
   Category?: string;
   ImageUrl?: string;
   Price?: string;
+  total?: string;
 };
 
 export const addProductSchema = () =>

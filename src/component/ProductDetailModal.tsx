@@ -1,8 +1,6 @@
 import { Modal } from "@mui/material";
 import { useState } from "react";
 import Rating from "@mui/material/Rating";
-import { shoe } from "../assets/images";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import Badge from "@mui/material/Badge";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { AddProductForm } from "../validators/addProduct";
