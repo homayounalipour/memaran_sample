@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { AddProductForm, addProductYup } from "../validators/addProduct";
-import { AddProductModal } from "./AddProductModal";
+import { ConfirmationModal } from "./ConfirmationModal";
 
 export function AddProductInput() {
   const { control, handleSubmit } = useForm<AddProductForm>({
@@ -18,7 +18,7 @@ export function AddProductInput() {
   });
   return (
     <>
-      <AddProductModal />
+      <ConfirmationModal addProduct visible={true} />
       <div className="px-20 py-9">
         <div className="flex flex-col gap-5">
           <Controller
