@@ -19,3 +19,26 @@ export type GetProductsAction = {
   type: string;
   payload: GetProductsForm;
 };
+
+export type ProductSortingForm = {
+  sort: string;
+};
+export type ProductSortingAction = {
+  type: string;
+  payload: ProductSortingForm;
+};
+
+export type AddProductRes = Pick<
+  TProducts,
+  "id" | "title" | "price" | "image" | "category" | "description"
+>;
+
+export type AddProductForm = Pick<
+  TProducts,
+  "title" | "price" | "image" | "category" | "description"
+>;
+
+export type AddProductAction = {
+  type: string;
+  payload: AddProductForm;
+};

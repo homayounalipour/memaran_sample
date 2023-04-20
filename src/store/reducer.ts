@@ -5,6 +5,8 @@ import { authReducer } from "./modules/auth/auth";
 import { getProductsReducer } from "./modules/product/getProducts";
 import { getProductWithIdReducer } from "./modules/product/getProductWithId";
 import { getCategoryReducer } from "./modules/product/getCategory";
+import { productSortingReducer } from "./modules/product/productSorting";
+import { addProductReducer } from "./modules/product/addProduct";
 
 export const rootReducer = combineReducers({
   token: tokenReducer,
@@ -13,4 +15,6 @@ export const rootReducer = combineReducers({
   getAllProducts: getProductsReducer,
   getProductWithId: getProductWithIdReducer,
   getCategory: getCategoryReducer,
+  productSorting: productSortingReducer,
+  addProduct: addProductReducer,
 });

@@ -2,7 +2,11 @@ import { useCallback } from "react";
 import ReduxFetchState from "redux-fetch-state";
 import { put, takeEvery, take, select } from "redux-saga/effects";
 
-import { LoginForm, LoginRes } from "../../../webServices/authentication";
+import {
+  LoginForm,
+  LoginPayload,
+  LoginRes,
+} from "../../../webServices/authentication";
 import {
   FetchResult,
   handleSagaFetchError,
@@ -15,15 +19,8 @@ import { LoggedInBy } from "../../../types/auth";
 
 const Login = new ReduxFetchState<LoginRes, LoginForm, string>("login");
 
-export type LoginPayload = {
-  type: string;
-  payload: LoginForm;
-};
-
 export function* watchLogin({ payload }: LoginPayload) {
   try {
-    const { username, password } = payload || {};
-
     const res: FetchResult<LoginRes> = yield sagaFetch<LoginRes>(
       `/auth/login`,
       {
