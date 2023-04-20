@@ -3,15 +3,17 @@ import { TStoreRedux } from "./store";
 import { loginSagas } from "./modules/auth/login";
 import { getProductsSagas } from "./modules/product/getProducts";
 import { getProductWithIdSagas } from "./modules/product/getProductWithId";
-import { getCategorySagas } from "./modules/product/getCategory";
+import { getCategoriesSagas } from "./modules/product/getCategories";
 import { productSortingSagas } from "./modules/product/productSorting";
 import { addProductSagas } from "./modules/product/addProduct";
+import {initSaga} from "./modules/init/init";
 export default function* rootSaga(store: TStoreRedux) {
   yield all([
+    initSaga(),
     loginSagas(),
     getProductsSagas(),
     getProductWithIdSagas(),
-    getCategorySagas(),
+    getCategoriesSagas(),
     productSortingSagas(),
     addProductSagas(),
   ]);

@@ -15,7 +15,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStore";
 import { setToken } from "../token/token";
 import { userLoggedIn } from "./auth";
-import { LoggedInBy } from "../../../types/auth";
 
 const Login = new ReduxFetchState<LoginRes, LoginForm, string>("login");
 
@@ -32,7 +31,7 @@ export function* watchLogin({ payload }: LoginPayload) {
     if (res.result.accessToken) {
       yield put(setToken(res.result.accessToken));
 
-      yield put(userLoggedIn(true, LoggedInBy.Password));
+      yield put(userLoggedIn(true));
     }
     yield put(Login.actions.loadSuccess(res.result));
   } catch (e: any) {
