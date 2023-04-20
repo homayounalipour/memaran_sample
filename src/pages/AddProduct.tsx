@@ -1,9 +1,9 @@
-import { LayOut } from "../kit/LayOut";
+import { Layout } from "../kit/Layout";
 import { AddProductInput } from "../component/AddProductInput";
 
 export function AddProduct() {
   return (
-    <LayOut>
+    <Layout>
       <div className="flex justify-center items-center pt-10 ">
         <span className="font-normal text-xs leading-3 w-[33vw] text-[#737373] pb-5">
           A Lorem Ipsum text generator is specifically designed to generate a
@@ -19,6 +19,6 @@ export function AddProduct() {
         </span>
         <AddProductInput />
       </div>
-    </LayOut>
+    </Layout>
   );
 }

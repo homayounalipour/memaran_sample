@@ -1,31 +1,19 @@
-import { LayOut } from "../kit/LayOut";
+import { Layout } from "../kit/Layout";
 import { shoe } from "../assets/images";
 import { AddProductForm } from "../validators/addProduct";
 import { HiMinusCircle } from "react-icons/hi";
 import TextField from "@mui/material/TextField";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import { useState } from "react";
-import { CheckBox } from "../kit/CheckBox";
-import { Hr } from "../kit/Hr";
+
 import { ShoppingCardTab } from "../component/shoppingCardTab";
 
-const x = [
-  {
-    id: 1,
-    image: { shoe },
-    Category: "clothes",
-    title: "Nike Triple Black Air Force 1 '07 sneakers",
-    description:
-      "A Lorem Ipsum text generator is specifically designed to generate a dummy text or placeholder text.",
-    price: "$1.620",
-  },
-];
+
 
 export function ShoppingCard(props: AddProductForm) {
   const { ImageUrl, Title, Price, total } = props;
 
   return (
-    <LayOut>
+    <Layout>
       <div className="px-36 pt-8">
         <span className="font-medium text-base leading-5">Shopping Cart</span>
       </div>
@@ -68,6 +56,6 @@ export function ShoppingCard(props: AddProductForm) {
           <ShoppingCardTab />
         </div>
       </div>
-    </LayOut>
+    </Layout>
   );
 }

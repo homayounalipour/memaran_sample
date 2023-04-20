@@ -3,12 +3,35 @@ import { HiSortDescending } from "react-icons/hi";
 import { BsArrowUp } from "react-icons/bs";
 import { BsArrowDown } from "react-icons/bs";
 import { Hr } from "../kit/Hr";
-import { CardShop } from "../component/CardShop";
-import { LayOut } from "../kit/LayOut";
+import { ProductsList } from "../component/ProductsList";
+import {Layout} from "../kit/Layout";
+import { useGetProducts } from "../store/modules/product/getProducts";
+import { useEffect } from "react";
+import {useLocationQuery} from "../hooks/useLocationQuery";
+import {useInitApp} from "../store/modules/init/init";
 
 export function HomePage() {
+  const {init} = useInitApp();
+
+  const {
+    products,
+    dispatchGetProducts,
+    loading: productsLoading,
+  } = useGetProducts();
+
+  const { query } = useLocationQuery<{category: string}>();
+
+
+
+  useEffect(() => {
+    dispatchGetProducts(query);
+  }, [query?.category]);
+
+
+  console.log(init)
+
   return (
-    <LayOut>
+    <Layout loading={init.loading}>
       <div className="pt-3">
         <img src={Banner} alt="Banner" />
       </div>
@@ -31,9 +54,9 @@ export function HomePage() {
           <Hr />
         </div>
         <div className="pt-2 grid grid-cols-4">
-          <CardShop />
+          <ProductsList products={products} loading={productsLoading} />
         </div>
       </div>
-    </LayOut>
+    </Layout>
   );
 }

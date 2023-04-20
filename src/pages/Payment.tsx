@@ -1,9 +1,9 @@
-import { LayOut } from "../kit/LayOut";
+import { Layout } from "../kit/Layout";
 import { PaymentInput } from "../component/PaymentInput";
 
 export function Payment() {
   return (
-    <LayOut>
+    <Layout>
       <div className="pt-8 pb-4 flex justify-center">
         <div className="w-[34vw] border rounded-lg flex py-8 flex gap-12 px-10  justify-start  ">
           <span className="flex leading-5 text-base font-bold">
@@ -21,6 +21,6 @@ export function Payment() {
         </span>
         <PaymentInput />
       </div>
-    </LayOut>
+    </Layout>
   );
 }
