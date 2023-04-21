@@ -6,10 +6,9 @@ import TextField from "@mui/material/TextField";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import { ShoppingCardTab } from "../component/shoppingCardTab";
+import { TGuard, WithGuard } from "../component/hoc/WithGuard";
 
-
-
-export function ShoppingCard(props: AddProductForm) {
+function ShoppingCard(props: AddProductForm) {
   const { ImageUrl, Title, Price, total } = props;
 
   return (
@@ -59,3 +58,7 @@ export function ShoppingCard(props: AddProductForm) {
     </Layout>
   );
 }
+
+const ShoppingCardHoc = WithGuard(ShoppingCard, TGuard.LoggedIn);
+
+export { ShoppingCardHoc as ShoppingCard };

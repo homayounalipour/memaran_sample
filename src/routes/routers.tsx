@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { LoginPage } from "../pages/LoginPage";
 import { HomePage } from "../pages/HomePage";
 import { AddProduct } from "../pages/AddProduct";
@@ -8,23 +8,27 @@ import { Payment } from "../pages/Payment";
 
 export const routers = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
+    element: <Navigate to='/home' />
+  },
+  {
+    path: "/login",
     element: <LoginPage />,
   },
   {
-    path: "/Home",
+    path: "/home",
     element: <HomePage />,
   },
   {
-    path: "/Add-product",
+    path: "/add-product",
     element: <AddProduct />,
   },
   {
-    path: "/Shopping-card",
+    path: "/shopping-card",
     element: <ShoppingCard />,
   },
   {
-    path: "/Payment",
+    path: "/payment",
     element: <Payment />,
   },
 ]);

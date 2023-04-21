@@ -15,8 +15,11 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../hooks/useStore";
 import { setToken } from "../token/token";
 import { userLoggedIn } from "./auth";
+import { routers } from "../../../routes/routers";
 
-const Login = new ReduxFetchState<LoginRes, LoginForm, string>("login");
+const Login = new ReduxFetchState<LoginRes, LoginForm, { message: string }>(
+  "login"
+);
 
 export function* watchLogin({ payload }: LoginPayload) {
   try {
@@ -28,16 +31,15 @@ export function* watchLogin({ payload }: LoginPayload) {
       }
     );
 
-    if (res.result.accessToken) {
-      yield put(setToken(res.result.accessToken));
-
+    if (res.result.token) {
+      yield put(setToken(res.result.token));
       yield put(userLoggedIn(true));
+      yield routers.navigate("/home", { replace: true });
     }
     yield put(Login.actions.loadSuccess(res.result));
   } catch (e: any) {
     yield handleSagaFetchError(e);
-    yield put(Login.actions.loadFailure(e));
-    yield put(Login.actions.resetForm());
+    yield put(Login.actions.loadFailure({ message: e.response.data }));
   }
 }
 

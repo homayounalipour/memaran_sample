@@ -3,14 +3,14 @@ import * as yup from "yup";
 import { validator } from "./validators";
 
 export type LoginForm = {
-  Username: string;
-  Password: string;
+  username: string;
+  password: string;
 };
 
 export const loginFormSchema = () =>
   yup.object({
-    Username: validator.email(),
-    Password: validator.password(true),
+    username: validator.string(true),
+    password: validator.string(true),
   });
 
 export const loginFormYup = () => yupResolver(loginFormSchema());

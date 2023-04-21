@@ -1,20 +1,34 @@
-import { LoginPic } from "../assets/images/index";
+import {LoginPic} from "../assets/images/index";
 import TextField from "@mui/material/TextField";
-import { Controller, useForm } from "react-hook-form";
-import { LoginForm, loginFormYup } from "../validators/login";
-import { LogoApp } from "../component/LogoApp";
+import {Controller, useForm} from "react-hook-form";
+import {LoginForm, loginFormYup} from "../validators/login";
+import {LogoApp} from "../component/LogoApp";
+import {useCallback} from "react";
+import {useLogin} from "../store/modules/auth/login";
+import {TGuard, WithGuard} from "../component/hoc/WithGuard";
 
-export function LoginPage() {
-
+function LoginPage() {
+  const { dispatchLogin, error } = useLogin();
   const { control, handleSubmit } = useForm<LoginForm>({
     defaultValues: {
-      Username: "",
-      Password: "",
+      username: "",
+      password: "",
     },
     mode: "all",
     reValidateMode: "onChange",
     resolver: loginFormYup(),
   });
+  const handleLogin = useCallback(
+    (data: LoginForm) => {
+      console.log(data);
+      dispatchLogin({
+        ...data,
+        username: data.username,
+        password: data.password,
+      });
+    },
+    [dispatchLogin]
+  );
 
   return (
     <div className="bg-blue-700 h-[100vh] pt-20">
@@ -22,7 +36,10 @@ export function LoginPage() {
         <div className="flex justify-center p-14 items-center items-center ">
           <img src={LoginPic} alt="LoginPic" />
         </div>
-        <div className="flex justify-center items-center gap-2 flex-col">
+        <form
+          className="flex justify-center items-center gap-2 flex-col"
+          onSubmit={handleSubmit(handleLogin)}
+        >
           <LogoApp />
           <p className="text-2xl text-[#6F11E1] leading-7 font-extrabold">
             Welcome back
@@ -33,15 +50,15 @@ export function LoginPage() {
           </p>
           <div className="pt-16 flex justify-center items-center flex-col">
             <Controller
-              name="Username"
+              name="username"
               control={control}
               render={({ field, fieldState }) => {
                 return (
                   <>
                     <TextField
                       {...field}
-                      id="Username"
-                      label="Username"
+                      id="username"
+                      label="username"
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -66,15 +83,15 @@ export function LoginPage() {
               }}
             />
             <Controller
-              name="Password"
+              name="password"
               control={control}
               render={({ field, fieldState }) => {
                 return (
                   <>
                     <TextField
                       {...field}
-                      id="Password"
-                      label="Password"
+                      id="password"
+                      label="password"
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -96,13 +113,31 @@ export function LoginPage() {
               }}
             />
           </div>
+          {error ? (
+            <p
+              style={{
+                fontSize: 12,
+                color: "red",
+                paddingTop: 20,
+              }}
+            >
+              {error.message}
+            </p>
+          ) : null}
           <div className="pt-16 ">
-            <button className="bg-[#6F11E1] w-[10vw] h-[5vh] text-white font-medium text-base leading-5 rounded">
+            <button
+              type="submit"
+              className="bg-[#6F11E1] w-[10vw] h-[5vh] text-white font-medium text-base leading-5 rounded"
+            >
               Login
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
 }
+
+const LoginPageHoc = WithGuard(LoginPage, TGuard.LoggedOut);
+
+export { LoginPageHoc as LoginPage }

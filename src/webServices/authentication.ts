@@ -3,7 +3,7 @@ export type LoginForm = {
   password?: string;
 };
 export type LoginRes = {
-  accessToken?: string;
+  token?: string;
 };
 
 export type LoginPayload = {
