@@ -24,7 +24,7 @@ export const routers = createBrowserRouter([
     element: <AddProduct />,
   },
   {
-    path: "/shopping-card",
+    path: "/cart",
     element: <ShoppingCard />,
   },
   {

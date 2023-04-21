@@ -22,7 +22,7 @@ export type InitAction = {
     type: string
 }
 
-export const initInitialState = {
+export const initInitialState: InitState = {
     loading: true,
 }
 

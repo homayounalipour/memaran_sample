@@ -3,13 +3,15 @@ import Rating from "@mui/material/Rating";
 import { Hr } from "../kit/Hr";
 import { truncate } from "../utils/truncate";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { TProducts } from "../webServices/products";
+import { TProduct } from "../webServices/products";
 
 export type ProductsListProps = {
-  product: TProducts;
+  product: TProduct;
+  onAddToCard: () =>void;
 };
 export function ProductCard(props: ProductsListProps) {
-  const { product } = props;
+  const { product, onAddToCard } = props;
+
 
   return (
     <div className="pb-2  grid grid-cols-4">
@@ -51,7 +53,7 @@ export function ProductCard(props: ProductsListProps) {
           </span>
           <div className=" flex justify-between gap-32 py-5 mt-auto">
             <span className="flex items-center">$ {product.price}</span>
-            <button>
+            <button type='button' onClick={onAddToCard}>
               <HiOutlineShoppingBag
                 color="white"
                 fontSize={43}

@@ -4,7 +4,7 @@ export enum Sorting {
   Descending = "desc",
   Ascending = "asc",
 }
-export type TProducts = {
+export type TProduct = {
   id: string;
   title: string;
   price: string;
@@ -28,12 +28,12 @@ export type GetProductsAction = {
 };
 
 export type AddProductRes = Pick<
-  TProducts,
+  TProduct,
   "id" | "title" | "price" | "image" | "category" | "description"
 >;
 
 export type AddProductForm = Pick<
-  TProducts,
+  TProduct,
   "title" | "price" | "image" | "category" | "description"
 >;
 
