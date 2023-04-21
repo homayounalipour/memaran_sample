@@ -1,7 +1,8 @@
 import { Layout } from "../kit/Layout";
 import { PaymentInput } from "../component/PaymentInput";
+import {TGuard, WithGuard} from "../component/hoc/WithGuard";
 
-export function Payment() {
+function Payment() {
   return (
     <Layout>
       <div className="pt-8 pb-4 flex justify-center">
@@ -24,3 +25,7 @@ export function Payment() {
     </Layout>
   );
 }
+
+const PaymentHoc = WithGuard(Payment, TGuard.LoggedIn);
+
+export { PaymentHoc as Payment }

@@ -15,10 +15,13 @@ const GetProducts = new ReduxFetchState<TProducts[], GetProductsForm, string>(
 );
 
 export function* watchGetProducts({ payload }: GetProductsAction) {
-  const { category } = payload || {};
-  console.log(category, 'category is here')
+  const { category, sort } = payload || {};
   try {
-    const url = category ? `/products/category/${category}` : "/products";
+    const url = sort
+      ? `/products?sort=${sort}`
+      : category
+      ? `/products/category/${category}`
+      : "/products";
     const res: FetchResult<TProducts[]> = yield sagaFetch<TProducts[]>(url);
     yield put(GetProducts.actions.loadSuccess(res.result));
   } catch (e: any) {
@@ -37,9 +40,12 @@ export function useGetProducts() {
   );
   const dispatch = useAppDispatch();
 
-  const dispatchGetProducts = useCallback((form?: GetProductsForm) => {
-    dispatch(GetProducts.actions.load(form));
-  }, [dispatch]);
+  const dispatchGetProducts = useCallback(
+    (form?: GetProductsForm) => {
+      dispatch(GetProducts.actions.load(form));
+    },
+    [dispatch]
+  );
 
   return {
     ...getProductsState,

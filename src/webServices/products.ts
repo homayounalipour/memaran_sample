@@ -1,3 +1,9 @@
+import {TCategories} from "./categories";
+
+export enum Sorting {
+  Descending = "desc",
+  Ascending = "asc",
+}
 export type TProducts = {
   id: string;
   title: string;
@@ -12,20 +18,13 @@ export type TProducts = {
 };
 
 export type GetProductsForm = {
-  category?: string;
+  category?: TCategories;
+  sort?: Sorting;
 };
 
 export type GetProductsAction = {
   type: string;
   payload: GetProductsForm;
-};
-
-export type ProductSortingForm = {
-  sort: string;
-};
-export type ProductSortingAction = {
-  type: string;
-  payload: ProductSortingForm;
 };
 
 export type AddProductRes = Pick<

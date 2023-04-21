@@ -1,7 +1,8 @@
 import { Layout } from "../kit/Layout";
 import { AddProductInput } from "../component/AddProductInput";
+import { TGuard, WithGuard } from "../component/hoc/WithGuard";
 
-export function AddProduct() {
+function AddProduct() {
   return (
     <Layout>
       <div className="flex justify-center items-center pt-10 ">
@@ -22,3 +23,7 @@ export function AddProduct() {
     </Layout>
   );
 }
+
+const AddProductHoc = WithGuard(AddProduct, TGuard.LoggedIn);
+
+export { AddProductHoc as AddProduct };

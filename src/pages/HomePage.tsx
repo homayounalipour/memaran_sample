@@ -1,17 +1,20 @@
 import { Banner } from "../assets/images/index";
 import { HiSortDescending } from "react-icons/hi";
-import { BsArrowUp } from "react-icons/bs";
-import { BsArrowDown } from "react-icons/bs";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { Hr } from "../kit/Hr";
 import { ProductsList } from "../component/ProductsList";
-import {Layout} from "../kit/Layout";
+import { Layout } from "../kit/Layout";
 import { useGetProducts } from "../store/modules/product/getProducts";
 import { useEffect } from "react";
-import {useLocationQuery} from "../hooks/useLocationQuery";
-import {useInitApp} from "../store/modules/init/init";
+import { useLocationQuery } from "../hooks/useLocationQuery";
+import { useInitApp } from "../store/modules/init/init";
+import { TGuard, WithGuard } from "../component/hoc/WithGuard";
+import { Sorting } from "../webServices/products";
+import { Link } from "react-router-dom";
+import { TCategories } from "../webServices/categories";
 
-export function HomePage() {
-  const {init} = useInitApp();
+function HomePage() {
+  const { init } = useInitApp();
 
   const {
     products,
@@ -19,16 +22,14 @@ export function HomePage() {
     loading: productsLoading,
   } = useGetProducts();
 
-  const { query } = useLocationQuery<{category: string}>();
-
-
+  const { query } = useLocationQuery<{
+    category: TCategories;
+    sort: Sorting;
+  }>();
 
   useEffect(() => {
     dispatchGetProducts(query);
-  }, [query?.category]);
-
-
-  console.log(init)
+  }, [query?.category, query?.sort]);
 
   return (
     <Layout loading={init.loading}>
@@ -42,12 +43,28 @@ export function HomePage() {
             sorting:
           </span>
           <div className="flex flex-row justify-center items-center gap-8">
-            <button className="hover:text-[#6F11E1] hover:font-medium cursor-pointer flex flex-row text-sm leading-4 font-normal">
+            <Link
+              to={`/home?sort=${Sorting.Ascending}`}
+              className={`hover:text-[#6F11E1] hover:font-medium 
+            cursor-pointer flex flex-row text-sm leading-4 font-normal  ${
+              query?.sort &&
+              query?.sort === Sorting.Ascending &&
+              "text-[#6F11E1]"
+            }`}
+            >
               Ascending <BsArrowUp size={16} />
-            </button>
-            <button className="hover:text-[#6F11E1] cursor-pointer hover:font-medium flex flex-row text-sm leading-4 font-normal">
+            </Link>
+            <Link
+              to={`/home?sort=${Sorting.Descending}`}
+              className={`hover:text-[#6F11E1] cursor-pointer 
+            hover:font-medium flex flex-row text-sm leading-4 font-normal  ${
+              query?.sort &&
+              query?.sort === Sorting.Descending &&
+              "text-[#6F11E1]"
+            }`}
+            >
               descending <BsArrowDown size={16} />
-            </button>
+            </Link>
           </div>
         </div>
         <div className="mt-2">
@@ -60,3 +77,6 @@ export function HomePage() {
     </Layout>
   );
 }
+const HomePageHoc = WithGuard(HomePage, TGuard.LoggedIn);
+
+export { HomePageHoc as HomePage };

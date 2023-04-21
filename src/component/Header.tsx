@@ -5,11 +5,13 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import Badge from "@mui/material/Badge";
 import { useGetCategories } from "../store/modules/product/getCategories";
 import { useEffect } from "react";
-import { useGetProducts } from "../store/modules/product/getProducts";
+import { useLocationQuery } from "../hooks/useLocationQuery";
+import { TCategories } from "../webServices/categories";
 
 export function Header() {
   const { categories, dispatchGetCategories } = useGetCategories();
-  const { products, dispatchGetProducts } = useGetProducts();
+
+  const { query } = useLocationQuery<{ category: TCategories }>();
 
   useEffect(() => {
     dispatchGetCategories();
@@ -21,13 +23,22 @@ export function Header() {
         <LogoApp />
       </div>
       <div className="flex justify-center gap-14 items-center">
-        {categories?.length ? categories?.map((category, index) => (
-          <Link key={index} to={`/home?category=${category}`}>
-            <span className="font-medium leading-5 text-base hover:border-b-4 hover:border-b-[#6F11E1] hover:pb-6">
-              {category}
-            </span>
-          </Link>
-        )) : null}
+        {categories?.length
+          ? categories?.map((category, index) => (
+              <Link key={index} to={`/home?category=${category}`}>
+                <span
+                  className={`font-medium leading-5 text-base hover:border-b-4 hover:border-b-[#6F11E1] pb-6
+                   ${
+                     query?.category &&
+                     query?.category === category &&
+                     "border-b border-b-4 border-b-[#6F11E1]"
+                   }`}
+                >
+                  {category}
+                </span>
+              </Link>
+            ))
+          : null}
       </div>
       <div className="flex flex-row gap-4 justify-center items-center">
         <button>
