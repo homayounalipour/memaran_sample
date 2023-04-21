@@ -1,20 +1,27 @@
 import { LogoApp } from "./LogoApp";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Badge from "@mui/material/Badge";
 import { useGetCategories } from "../store/modules/product/getCategories";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useLocationQuery } from "../hooks/useLocationQuery";
 import { TCategories } from "../webServices/categories";
+import { useCart } from "../store/modules/cart/cart";
 
 export function Header() {
   const { categories, dispatchGetCategories } = useGetCategories();
+  const { cart } = useCart();
 
   const { query } = useLocationQuery<{ category: TCategories }>();
 
+  const navigate = useNavigate();
   useEffect(() => {
     dispatchGetCategories();
+  }, []);
+
+  const handleNavigateShoppingCard = useCallback(() => {
+    navigate("/cart");
   }, []);
 
   return (
@@ -41,14 +48,15 @@ export function Header() {
           : null}
       </div>
       <div className="flex flex-row gap-4 justify-center items-center">
-        <button>
+        <button type="button" onClick={handleNavigateShoppingCard}>
           <Badge
             color="warning"
-            badgeContent={1}
+            badgeContent={cart.length}
             anchorOrigin={{
               vertical: "top",
               horizontal: "left",
             }}
+            invisible={!cart.length}
           >
             <HiOutlineShoppingBag
               color="white"

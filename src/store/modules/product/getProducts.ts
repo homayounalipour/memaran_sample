@@ -7,10 +7,10 @@ import { FetchResult, handleSagaFetchError, sagaFetch } from "utils/fetch";
 import {
   GetProductsAction,
   GetProductsForm,
-  TProducts,
+  TProduct,
 } from "../../../webServices/products";
 
-const GetProducts = new ReduxFetchState<TProducts[], GetProductsForm, string>(
+const GetProducts = new ReduxFetchState<TProduct[], GetProductsForm, string>(
   "getAllProducts"
 );
 
@@ -22,7 +22,7 @@ export function* watchGetProducts({ payload }: GetProductsAction) {
       : category
       ? `/products/category/${category}`
       : "/products";
-    const res: FetchResult<TProducts[]> = yield sagaFetch<TProducts[]>(url);
+    const res: FetchResult<TProduct[]> = yield sagaFetch<TProduct[]>(url);
     yield put(GetProducts.actions.loadSuccess(res.result));
   } catch (e: any) {
     yield put(GetProducts.actions.loadFailure(e));

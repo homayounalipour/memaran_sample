@@ -5,15 +5,15 @@ import { takeEvery, put } from "redux-saga/effects";
 // import { GetAppointmentsRes } from 'webServices/appointments';
 import { useAppDispatch, useAppSelector } from "hooks/useStore";
 import { FetchResult, handleSagaFetchError, sagaFetch } from "utils/fetch";
-import { TProducts } from "../../../webServices/products";
+import { TProduct } from "../../../webServices/products";
 
-const GetProductWithId = new ReduxFetchState<TProducts, null, string>(
+const GetProductWithId = new ReduxFetchState<TProduct, null, string>(
   "getProductWithId"
 );
 
 export function* watchGetProductWithId(payload) {
   try {
-    const res: FetchResult<TProducts> = yield sagaFetch<TProducts[]>(
+    const res: FetchResult<TProduct> = yield sagaFetch<TProduct[]>(
       `/products//${payload.id}`
     );
     yield put(GetProductWithId.actions.loadSuccess(res.result));

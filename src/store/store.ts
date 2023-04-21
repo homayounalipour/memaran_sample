@@ -9,7 +9,7 @@ import rootSaga from "./sagas";
 const persistConfig = {
   key: "ShopPersist",
   storage,
-  whitelist: ["token", "auth", "profile"],
+  whitelist: ["token", "cart"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

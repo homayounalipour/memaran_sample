@@ -7,6 +7,7 @@ import { getProductWithIdReducer } from "./modules/product/getProductWithId";
 import { getCategoriesReducer } from "./modules/product/getCategories";
 import { addProductReducer } from "./modules/product/addProduct";
 import {initReducer} from "./modules/init/init";
+import {cartReducer} from "./modules/cart/cart";
 
 export const rootReducer = combineReducers({
   init: initReducer,
@@ -17,4 +18,5 @@ export const rootReducer = combineReducers({
   getProductWithId: getProductWithIdReducer,
   getCategories: getCategoriesReducer,
   addProduct: addProductReducer,
+  cart:cartReducer
 });

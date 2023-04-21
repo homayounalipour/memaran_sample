@@ -1,15 +1,19 @@
 import { ProductDetailModal } from "./ProductDetailModal";
-import { TProducts } from "../webServices/products";
+import { TProduct } from "../webServices/products";
 import { ProductCard } from "./ProductCard";
 import { ProductLoadingSkeleton } from "./ProductLoadingSkeleton";
+import { useCart } from "../store/modules/cart/cart";
 
 export type ProductsListProps = {
-  products: TProducts[] | null;
+  products: TProduct[] | null;
   loading: boolean;
 };
 
 export function ProductsList(props: ProductsListProps) {
   const { products, loading } = props;
+  const {
+    dispatchAddToCart,
+  } = useCart();
 
   return (
     <>
@@ -21,7 +25,7 @@ export function ProductsList(props: ProductsListProps) {
               return <ProductLoadingSkeleton />;
             })
         : products?.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} onAddToCard={()=> dispatchAddToCart(product)} />
           ))}
     </>
   );

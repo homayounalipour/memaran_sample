@@ -2,8 +2,11 @@ import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { AddProductForm, addProductYup } from "../validators/addProduct";
 import { ConfirmationModal } from "./ConfirmationModal";
+import { useCart } from "../store/modules/cart/cart";
+import {useEffect} from "react";
 
 export function AddProductInput() {
+
   const { control, handleSubmit } = useForm<AddProductForm>({
     defaultValues: {
       Title: "",
@@ -16,6 +19,9 @@ export function AddProductInput() {
     reValidateMode: "onChange",
     resolver: addProductYup(),
   });
+
+
+
   return (
     <>
       <ConfirmationModal addProduct visible={true} />
