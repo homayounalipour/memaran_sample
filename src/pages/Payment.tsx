@@ -1,8 +1,11 @@
 import { Layout } from "../kit/Layout";
 import { PaymentInput } from "../component/PaymentInput";
-import {TGuard, WithGuard} from "../component/hoc/WithGuard";
+import { TGuard, WithGuard } from "../component/hoc/WithGuard";
+import { useCart } from "../store/modules/cart/cart";
 
 function Payment() {
+  const { totalPrice } = useCart();
+
   return (
     <Layout>
       <div className="pt-8 pb-4 flex justify-center">
@@ -10,7 +13,9 @@ function Payment() {
           <span className="flex leading-5 text-base font-bold">
             Total Amount:
           </span>
-          <span className="flex leading-5 text-base font-medium ">$1.620</span>
+          <span className="flex leading-5 text-base font-medium ">
+            $ {totalPrice.toFixed(3)}
+          </span>
         </div>
       </div>
       <div className="flex  m-auto border w-[34vw]  rounded-lg flex-col">
@@ -28,4 +33,4 @@ function Payment() {
 
 const PaymentHoc = WithGuard(Payment, TGuard.LoggedIn);
 
-export { PaymentHoc as Payment }
+export { PaymentHoc as Payment };

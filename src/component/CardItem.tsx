@@ -1,8 +1,6 @@
 import { HiMinusCircle } from "react-icons/hi";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import { shoe } from "../assets/images";
-import { TProduct } from "../webServices/products";
-import { CartItem } from "../store/modules/cart/cart";
+import { CartItem, useCart } from "../store/modules/cart/cart";
 
 export type CardItemProps = {
   cartItem: CartItem;
@@ -16,15 +14,15 @@ export function CardItem(props: CardItemProps) {
     onIncrease,
     onDecrease,
   } = props;
+  const { cart } = useCart();
 
   return (
     <>
-      <div className="px-14 pt-8 flex justify-between items-center">
+      <div className="px-14 pt-8 flex justify-between items-center ">
         <img
           src={product.image}
           alt={product.title}
-          width="132px"
-          height="95px"
+          style={{ width: 132, height: 95 }}
         />
         <span className="w-[10vw] font-medium leading-5 text-base">
           {product.title}
