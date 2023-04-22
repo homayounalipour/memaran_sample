@@ -35,6 +35,7 @@ export const removeCartItem = (id: string) => ({
 
 export type CartState = {
   cart: CartItem[];
+  totalPrice: number;
 };
 
 export type CartAction = {
@@ -44,6 +45,7 @@ export type CartAction = {
 };
 export const cartInitialState: CartState = {
   cart: [],
+  totalPrice: 0,
 };
 
 export const cartReducer = (
@@ -60,8 +62,10 @@ export const cartReducer = (
         const selectedProduct = { ...cartClone[selectedIndex] };
         selectedProduct.quantity++;
         cartClone[selectedIndex] = selectedProduct;
+
         return {
           cart: cartClone,
+          totalPrice: state.totalPrice + +action.product.price,
         };
       } else {
         const addedProduct: CartItem = {
@@ -71,6 +75,7 @@ export const cartReducer = (
 
         return {
           cart: [...state.cart, addedProduct],
+          totalPrice: state.totalPrice + +action.product.price,
         };
       }
     case INCREASE_CART_ITEM: {
@@ -81,8 +86,10 @@ export const cartReducer = (
       const selectedProduct = { ...cartClone[selectedIndex] };
       selectedProduct.quantity++;
       cartClone[selectedIndex] = selectedProduct;
+
       return {
         cart: cartClone,
+        totalPrice: state.totalPrice + +selectedProduct.product.price,
       };
     }
     case DECREASE_CART_ITEM:
@@ -97,21 +104,33 @@ export const cartReducer = (
       } else {
         cartClone = cartClone.filter((item) => item.product.id !== action.id);
       }
+      if (selectedProduct.quantity >= 1) {
+        toast.success("product has been removed");
+      }
 
       return {
         cart: cartClone,
+        totalPrice: state.totalPrice - +selectedProduct.product.price,
       };
-    case REMOVE_CART_ITEM:
+    case REMOVE_CART_ITEM: {
+      const selectedProduct = state.cart.find(
+        (item) => item.product.id === action.product.id
+      );
       return {
         cart: state.cart.filter((item) => item.product.id !== action.id),
+        totalPrice: selectedProduct
+          ? state.totalPrice -
+            +selectedProduct.product.price * selectedProduct.quantity
+          : state.totalPrice,
       };
+    }
     default:
       return state;
   }
 };
 
 export function useCart() {
-  const { cart } = useAppSelector((state) => state.cart);
+  const { cart, totalPrice } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   const dispatchAddToCart = useCallback(
@@ -145,6 +164,7 @@ export function useCart() {
 
   return {
     cart,
+    totalPrice,
     dispatchAddToCart,
     dispatchIncreaseCart,
     dispatchDecreaseCart,

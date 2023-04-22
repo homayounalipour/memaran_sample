@@ -17,6 +17,7 @@ export const CheckBox = <T extends any>(props: CheckBoxProps<T>) => {
         value={value as any}
         type="radio"
         checked={checked}
+        className="checked: accent-[#EE5325]"
         onChange={onChange}
       />
     </label>

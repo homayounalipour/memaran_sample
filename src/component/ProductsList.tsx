@@ -11,9 +11,7 @@ export type ProductsListProps = {
 
 export function ProductsList(props: ProductsListProps) {
   const { products, loading } = props;
-  const {
-    dispatchAddToCart,
-  } = useCart();
+  const { dispatchAddToCart } = useCart();
 
   return (
     <>
@@ -25,7 +23,11 @@ export function ProductsList(props: ProductsListProps) {
               return <ProductLoadingSkeleton />;
             })
         : products?.map((product) => (
-            <ProductCard key={product.id} product={product} onAddToCard={()=> dispatchAddToCart(product)} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCard={() => dispatchAddToCart(product)}
+            />
           ))}
     </>
   );

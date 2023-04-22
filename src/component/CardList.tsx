@@ -7,7 +7,12 @@ export function CardList() {
   return (
     <>
       {cart.map((product) => (
-        <CardItem key={product.product.id} cartItem={product} onIncrease={() => dispatchIncreaseCart(product.product.id)} onDecrease={() => dispatchDecreaseCart(product.product.id)} />
+        <CardItem
+          key={product.product.id}
+          cartItem={product}
+          onIncrease={() => dispatchIncreaseCart(product.product.id)}
+          onDecrease={() => dispatchDecreaseCart(product.product.id)}
+        />
       ))}
     </>
   );
