@@ -1,12 +1,11 @@
 import { CheckBox } from "../kit/CheckBox";
 import { Hr } from "../kit/Hr";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Tabs } from "./Tabs";
 import { Tab } from "./Tab";
 import { useNavigate } from "react-router-dom";
-import { CartItem, useCart } from "../store/modules/cart/cart";
+import { useCart } from "../store/modules/cart/cart";
 import { toast } from "react-toastify";
-import { TProduct } from "../webServices/products";
 
 export type Loan = {
   month: number;
@@ -16,7 +15,7 @@ export type Loan = {
 const loanDatas: Loan[] = [
   {
     month: 3,
-    percent: 20,
+    percent: 5,
   },
   {
     month: 6,
@@ -24,7 +23,7 @@ const loanDatas: Loan[] = [
   },
   {
     month: 12,
-    percent: 5,
+    percent: 20,
   },
 ];
 
@@ -36,23 +35,40 @@ export enum PaymentTab {
 export function ShoppingCardTab() {
   const [activeTab, setActiveTab] = useState<PaymentTab>(PaymentTab.Cash);
   const { totalPrice } = useCart();
-  console.log(totalPrice, "totalPrice <><<><><>////// sisss");
 
   const [selectedLoan, setSelectedLoan] = useState<Loan | null>(null);
+  const [loanCalc, setLoanCalc] = useState<number>(0);
 
   const navigate = useNavigate();
 
-  const handleChangeLoan = useCallback((loan: Loan) => {
-    setSelectedLoan(loan);
-  }, []);
-
-  const handleNavigateToPayment = () => {
-    if (totalPrice > 1) {
-      navigate("/payment");
-    } else {
-      toast.error("your shopping card has empty");
+  useEffect(() => {
+    if (!totalPrice) {
+      setLoanCalc(0);
     }
-  };
+  }, [setLoanCalc, totalPrice]);
+  const handleChangeLoan = useCallback(
+    (loan: Loan) => {
+      setSelectedLoan(loan);
+      const result = (totalPrice * loan.percent) / 100;
+      setLoanCalc(result);
+    },
+    [, setSelectedLoan]
+  );
+
+  const handleNavigateToPayment = useCallback(() => {
+    if (activeTab === PaymentTab.Cash && totalPrice > 1) {
+      navigate("/payment");
+    }
+    if (activeTab === PaymentTab.Cash && totalPrice < 1) {
+      toast.error("your shopping cart has empty");
+    } else {
+      if (activeTab === PaymentTab.Loan && selectedLoan && totalPrice > 1) {
+        navigate("/payment");
+      } else {
+        toast.error("your shopping cart has empty");
+      }
+    }
+  }, [totalPrice]);
 
   return (
     <div
@@ -106,30 +122,28 @@ export function ShoppingCardTab() {
         <Tab tab={PaymentTab.Loan}>
           <>
             {loanDatas.map((data, index) => (
-              <div key={index}>
-                <div className="flex flex-col justify-center items-center pt-3">
-                  <div className="flex items-center justify-center gap-2">
-                    <div className="flex justify-center ">
-                      <CheckBox
-                        value={data}
-                        checked={data.month === selectedLoan?.month}
-                        name={data.month.toString()}
-                        id={data.month.toString()}
-                        onChange={() => handleChangeLoan(data)}
-                      />
-                    </div>
-                    <div className="flex  gap-2">
-                      <span className="leading-4 text-base font-medium">
-                        {data.month} month
-                      </span>
-                      -
-                      <span className="text-sm text-[#A8A8A8] font-medium leading-4">
-                        {data.percent}%
-                      </span>
-                      <span className="text-sm text-[#A8A8A8] font-medium leading-4">
-                        intersts
-                      </span>
-                    </div>
+              <div key={index} className="flex justify-center  pt-3  ">
+                <div className="flex gap-2 ">
+                  <div className="flex     ">
+                    <CheckBox
+                      value={data}
+                      checked={data.month === selectedLoan?.month}
+                      name={data.month.toString()}
+                      id={data.month.toString()}
+                      onChange={() => handleChangeLoan(data)}
+                    />
+                  </div>
+                  <div className="flex justify-center items-center lg:w-[180px]  gap-2">
+                    <span className="leading-4 text-base font-medium">
+                      {data.month} month
+                    </span>
+                    -
+                    <span className="text-sm text-[#A8A8A8] font-medium leading-4">
+                      {data.percent}%
+                    </span>
+                    <span className="text-sm text-[#A8A8A8] font-medium leading-4">
+                      intersts
+                    </span>
                   </div>
                 </div>
               </div>
@@ -143,10 +157,14 @@ export function ShoppingCardTab() {
               <div className="flex gap-12 flex-col items-center justify-center pt-4">
                 {selectedLoan && (
                   <>
-                    <div className="py-8 flex gap-8">
-                      <div className="border-[10px] flex flex-col items-center rounded-full w-[100px] h-[100px]">
-                        <span className="flex justify-end">$1.620</span>
-                        <span className="flex justify-start">$800</span>
+                    <div className="py-8 flex gap-8 relative">
+                      <div className="border-[10px] flex  items-center rounded-full w-[100px] h-[100px]">
+                        <span className="  absolute bottom-12 ">
+                          {totalPrice.toFixed(3)}
+                        </span>
+                        <span className="absolute top-12 left-10">
+                          ${loanCalc?.toFixed(3)}
+                        </span>
                       </div>
                       <div className="flex flex-col justify-center gap-2">
                         <div className="flex gap-2 items-center ">
@@ -163,7 +181,11 @@ export function ShoppingCardTab() {
                       className="flex justify-center"
                       style={{ paddingBottom: selectedLoan ? 60 : 10 }}
                     >
-                      <button className="bg-[#FD6644] rounded-md px-4 py-2 leading-5 text-base font-normal text-white">
+                      <button
+                        type="button"
+                        onClick={handleNavigateToPayment}
+                        className="bg-[#FD6644] rounded-md px-4 py-2 leading-5 text-base font-normal text-white"
+                      >
                         Proceed to Check Out
                       </button>
                     </div>

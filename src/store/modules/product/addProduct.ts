@@ -19,6 +19,7 @@ const AddProduct = new ReduxFetchState<AddProductRes, AddProductForm, string>(
 );
 
 export function* watchAddProduct({ payload }: AddProductAction) {
+  console.log(payload, "payload uis ///");
   try {
     const res: FetchResult<AddProductRes> = yield sagaFetch<AddProductRes>(
       `/products`,

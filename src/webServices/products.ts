@@ -47,7 +47,7 @@ export type AddProductRes = Pick<
 
 export type AddProductForm = Pick<
   TProduct,
-  "title" | "price" | "image" | "category" | "description"
+  "title" | "price" | "image" | "category" | "description" | "id"
 >;
 
 export type AddProductAction = {

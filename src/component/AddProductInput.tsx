@@ -2,41 +2,53 @@ import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { AddProductForm, addProductYup } from "../validators/addProduct";
 import { ConfirmationModal } from "./ConfirmationModal";
-import { useCart } from "../store/modules/cart/cart";
-import {useEffect} from "react";
+import { useCallback, useState } from "react";
 
-export function AddProductInput() {
+export type AddProductInputProps = {
+  onAddProduct: (data: any) => void;
+  visible?: boolean;
+  handleCloseModal: () => void;
+};
+
+export function AddProductInput(props: AddProductInputProps) {
+  const { onAddProduct, visible, handleCloseModal } = props;
 
   const { control, handleSubmit } = useForm<AddProductForm>({
     defaultValues: {
-      Title: "",
-      Description: "",
-      Category: "",
-      ImageUrl: "",
-      Price: "",
+      id: "",
+      title: "",
+      description: "",
+      category: "",
+      image: "",
+      price: "",
     },
     mode: "all",
     reValidateMode: "onChange",
     resolver: addProductYup(),
   });
 
-
-
   return (
     <>
-      <ConfirmationModal addProduct visible={true} />
+      <ConfirmationModal
+        addProduct
+        visible={!visible}
+        onclose={handleCloseModal}
+      />
       <div className="px-20 py-9">
-        <div className="flex flex-col gap-5">
+        <form
+          onSubmit={handleSubmit(onAddProduct)}
+          className="flex flex-col gap-5"
+        >
           <Controller
-            name="Title"
+            name="title"
             control={control}
             render={({ field, fieldState }) => {
               return (
                 <>
                   <TextField
                     {...field}
-                    id="Title"
-                    label="Title"
+                    id="title"
+                    label="title"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -59,15 +71,15 @@ export function AddProductInput() {
             }}
           />
           <Controller
-            name="Description"
+            name="description"
             control={control}
             render={({ field, fieldState }) => {
               return (
                 <>
                   <TextField
                     {...field}
-                    id="Description"
-                    label="Description"
+                    id="description"
+                    label="description"
                     multiline
                     rows={2}
                     InputLabelProps={{
@@ -92,15 +104,15 @@ export function AddProductInput() {
             }}
           />
           <Controller
-            name="Category"
+            name="category"
             control={control}
             render={({ field, fieldState }) => {
               return (
                 <>
                   <TextField
                     {...field}
-                    id="Category"
-                    label="Category"
+                    id="category"
+                    label="category"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -123,15 +135,15 @@ export function AddProductInput() {
             }}
           />
           <Controller
-            name="ImageUrl"
+            name="image"
             control={control}
             render={({ field, fieldState }) => {
               return (
                 <>
                   <TextField
                     {...field}
-                    id="ImageUrl"
-                    label="ImageUrl"
+                    id="image"
+                    label="image"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -153,16 +165,17 @@ export function AddProductInput() {
               );
             }}
           />
+
           <Controller
-            name="Price"
+            name="price"
             control={control}
             render={({ field, fieldState }) => {
               return (
                 <>
                   <TextField
                     {...field}
-                    id="Price"
-                    label="Price"
+                    id="price"
+                    label="price"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -188,11 +201,14 @@ export function AddProductInput() {
             <button className="border  border-[#FE5B3A] text-[#FE5B3A] w-[171px] h-[43px] leading-5 text-base font-normal rounded-md ">
               Cancel
             </button>
-            <button className="bg-[#FE5B3A] rounded-md w-[171px] h-[43px] leading-5 text-base font-normal text-white">
+            <button
+              type="submit"
+              className="bg-[#FE5B3A] rounded-md w-[171px] h-[43px] leading-5 text-base font-normal text-white"
+            >
               Add Product
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

@@ -18,7 +18,7 @@ export function CardItem(props: CardItemProps) {
 
   return (
     <>
-      <div className="px-14 pt-8 flex justify-between items-center ">
+      <div className="px-14 pt-8 flex justify-between items-center">
         <img
           src={product.image}
           alt={product.title}

@@ -1,8 +1,33 @@
 import { Layout } from "../kit/Layout";
 import { AddProductInput } from "../component/AddProductInput";
 import { TGuard, WithGuard } from "../component/hoc/WithGuard";
+import { useAddProduct } from "../store/modules/product/addProduct";
+import { useCallback, useEffect, useState } from "react";
+import { AddProductForm } from "../webServices/products";
 
 function AddProduct() {
+  const { dispatchAddProduct } = useAddProduct();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleAddProduct = useCallback(
+    (data: AddProductForm) => {
+      dispatchAddProduct({
+        id: data.id,
+        image: data.image,
+        price: data.price,
+        description: data.description,
+        title: data.title,
+        category: data.category,
+      });
+      setShowModal(true);
+    },
+    [dispatchAddProduct]
+  );
+
+  const handleCloseModal = useCallback(() => {
+    setShowModal(false);
+  }, []);
 
   return (
     <Layout>
@@ -19,7 +44,11 @@ function AddProduct() {
         >
           Add Product
         </span>
-        <AddProductInput />
+        <AddProductInput
+          visible={showModal}
+          onAddProduct={handleAddProduct}
+          handleCloseModal={handleCloseModal}
+        />
       </div>
     </Layout>
   );

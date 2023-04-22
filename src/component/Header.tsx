@@ -11,7 +11,7 @@ import { useCart } from "../store/modules/cart/cart";
 
 export function Header() {
   const { categories, dispatchGetCategories } = useGetCategories();
-  const { cart } = useCart();
+  const { cart, totalPrice } = useCart();
 
   const { query } = useLocationQuery<{ category: TCategories }>();
 
@@ -22,6 +22,9 @@ export function Header() {
 
   const handleNavigateShoppingCard = useCallback(() => {
     navigate("/cart");
+  }, []);
+  const handleNavigateAddProduct = useCallback(() => {
+    navigate("/add-product");
   }, []);
 
   return (
@@ -65,7 +68,11 @@ export function Header() {
             />
           </Badge>
         </button>
-        <button className="flex flex-row justify-center items-center bg-[#6F11E1] w-[165px] h-[43px] rounded gap-2 text-white">
+        <button
+          type="button"
+          onClick={handleNavigateAddProduct}
+          className="flex flex-row justify-center items-center bg-[#6F11E1] w-[165px] h-[43px] rounded gap-2 text-white"
+        >
           <AiOutlinePlusCircle fontSize={30} color="white" />
           Add product
         </button>
