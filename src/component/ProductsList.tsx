@@ -1,4 +1,3 @@
-import { ProductDetailModal } from "./ProductDetailModal";
 import { TProduct } from "../webServices/products";
 import { ProductCard } from "./ProductCard";
 import { ProductLoadingSkeleton } from "./ProductLoadingSkeleton";
@@ -15,7 +14,6 @@ export function ProductsList(props: ProductsListProps) {
 
   return (
     <>
-      <ProductDetailModal />
       {loading
         ? Array(20)
             .fill(20)

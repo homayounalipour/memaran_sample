@@ -5,17 +5,25 @@ import { takeEvery, put } from "redux-saga/effects";
 // import { GetAppointmentsRes } from 'webServices/appointments';
 import { useAppDispatch, useAppSelector } from "hooks/useStore";
 import { FetchResult, handleSagaFetchError, sagaFetch } from "utils/fetch";
-import { TProduct } from "../../../webServices/products";
+import {
+  GetProductIdAction,
+  GetProductIdForm,
+  GetProductIdRes,
+} from "../../../webServices/products";
 
-const GetProductWithId = new ReduxFetchState<TProduct, null, string>(
-  "getProductWithId"
-);
+const GetProductWithId = new ReduxFetchState<
+  GetProductIdRes,
+  GetProductIdForm,
+  string
+>("getProductWithId");
 
-export function* watchGetProductWithId(payload) {
+export function* watchGetProductWithId({ payload }: GetProductIdAction) {
+  const { id } = payload || {};
   try {
-    const res: FetchResult<TProduct> = yield sagaFetch<TProduct[]>(
-      `/products//${payload.id}`
+    const res: FetchResult<GetProductIdRes> = yield sagaFetch<GetProductIdRes>(
+      `/products/${payload.id}`
     );
+    console.log(id, "productId is here");
     yield put(GetProductWithId.actions.loadSuccess(res.result));
   } catch (e: any) {
     yield put(GetProductWithId.actions.loadFailure(e));
@@ -33,14 +41,17 @@ export function useGetProductWithId() {
   );
   const dispatch = useAppDispatch();
 
-  const dispatchGetProductWithId = useCallback(() => {
-    dispatch(GetProductWithId.actions.load());
-  }, [dispatch]);
+  const dispatchGetProductWithId = useCallback(
+    (form?: GetProductIdForm) => {
+      dispatch(GetProductWithId.actions.load(form));
+    },
+    [dispatch]
+  );
 
   return {
     ...getProductWithIdState,
     dispatchGetProductWithId,
-    doctorAppointments: data,
+    productId: data,
   };
 }
 

@@ -14,7 +14,7 @@ function Payment() {
             Total Amount:
           </span>
           <span className="flex leading-5 text-base font-medium ">
-            ${totalPrice}
+            $ {totalPrice.toFixed(3)}
           </span>
         </div>
       </div>

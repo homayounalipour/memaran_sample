@@ -47,7 +47,7 @@ export function ShoppingCardTab() {
   }, []);
 
   const handleNavigateToPayment = () => {
-    if (totalPrice) {
+    if (totalPrice > 1) {
       navigate("/payment");
     } else {
       toast.error("your shopping card has empty");
@@ -90,10 +90,10 @@ export function ShoppingCardTab() {
           <div className="flex justify-evenly items-center pt-8">
             <span className="leading-5 text-base font-bold">Total Amount:</span>
             <span className="leading-5 text-base font-medium">
-              {totalPrice}
+              {totalPrice.toFixed(3)}
             </span>
           </div>
-          <div className="flex justify-center pt-24 ">
+          <div className="flex justify-center py-6 ">
             <button
               onClick={handleNavigateToPayment}
               type="button"

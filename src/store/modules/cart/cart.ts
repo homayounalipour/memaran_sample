@@ -62,7 +62,6 @@ export const cartReducer = (
         const selectedProduct = { ...cartClone[selectedIndex] };
         selectedProduct.quantity++;
         cartClone[selectedIndex] = selectedProduct;
-
         return {
           cart: cartClone,
           totalPrice: state.totalPrice + +action.product.price,
