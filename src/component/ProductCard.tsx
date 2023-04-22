@@ -5,7 +5,6 @@ import { truncate } from "../utils/truncate";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { TProduct } from "../webServices/products";
 import { ProductDetailModal } from "./ProductDetailModal";
-import { useGetProductWithId } from "../store/modules/product/getProductWithId";
 import { useCallback, useEffect, useState } from "react";
 
 export type ProductsListProps = {
@@ -14,6 +13,8 @@ export type ProductsListProps = {
 };
 export function ProductCard(props: ProductsListProps) {
   const { product, onAddToCard } = props;
+
+  console.log(product.rating.count, "rate count ,,,,,,,,");
 
   const [showModal, setShowModal] = useState(false);
 
@@ -68,7 +69,7 @@ export function ProductCard(props: ProductsListProps) {
                   color: "white",
                 }}
               />
-              <Rating name="half-rating" defaultValue={4} />
+              <Rating name="half-rating" value={+product.rating.rate} />
             </div>
             <span className="pl-2 font-medium leading-5 text-base">
               {truncate(product.title, 50)}

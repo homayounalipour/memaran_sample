@@ -129,6 +129,7 @@ export const cartReducer = (
 };
 
 export function useCart() {
+  // @ts-ignore
   const { cart, totalPrice } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 

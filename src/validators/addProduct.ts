@@ -3,20 +3,21 @@ import * as yup from "yup";
 import { validator } from "./validators";
 
 export type AddProductForm = {
-  Title?: string;
-  Description?: string;
-  Category?: string;
-  ImageUrl?: string;
-  Price?: string;
+  id?: string;
+  title?: string;
+  description?: string;
+  category?: string;
+  image?: string;
+  price?: string;
 };
 
 export const addProductSchema = () =>
   yup.object({
-    Title: validator.string(true),
-    Description: validator.string(true),
-    Category: validator.string(true),
-    ImageUrl: validator.url(true),
-    Price: validator.price(true),
+    title: validator.string(true),
+    description: validator.string(true),
+    category: validator.string(true),
+    image: validator.url(true),
+    price: validator.price(true),
   });
 
 export const addProductYup = () => yupResolver(addProductSchema());

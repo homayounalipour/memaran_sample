@@ -5,7 +5,7 @@ export function CardList() {
   const { cart, dispatchIncreaseCart, dispatchDecreaseCart } = useCart();
 
   return (
-    <>
+    <div className={`${cart ? "h-full" : "h-[286px]"}`}>
       {cart.map((product) => (
         <CardItem
           key={product.product.id}
@@ -14,6 +14,6 @@ export function CardList() {
           onDecrease={() => dispatchDecreaseCart(product.product.id)}
         />
       ))}
-    </>
+    </div>
   );
 }

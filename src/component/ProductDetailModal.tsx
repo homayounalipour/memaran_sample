@@ -34,9 +34,7 @@ export function ProductDetailModal(props: ProductDetailModalProps) {
           </span>
           <Rating
             name="custom-no-value"
-            defaultValue={1}
-            precision={1}
-            value={1}
+            value={+product.rating.rate}
           />
         </div>
         <div className="flex flex-row px-24 py-16">

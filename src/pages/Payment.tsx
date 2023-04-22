@@ -2,8 +2,17 @@ import { Layout } from "../kit/Layout";
 import { PaymentInput } from "../component/PaymentInput";
 import { TGuard, WithGuard } from "../component/hoc/WithGuard";
 import { useCart } from "../store/modules/cart/cart";
+import { useCallback, useState } from "react";
+import { ConfirmationModal } from "../component/ConfirmationModal";
+
+// export type AddProductProps = {
+//   visible?: boolean;
+//   handleCloseModal?: () => void;
+// };
 
 function Payment() {
+  // const { visible, handleCloseModal } = props;
+
   const { totalPrice } = useCart();
 
   return (
@@ -25,6 +34,7 @@ function Payment() {
         >
           Payments
         </span>
+
         <PaymentInput />
       </div>
     </Layout>
