@@ -45,15 +45,16 @@ export function ShoppingCardTab() {
     if (!totalPrice) {
       setLoanCalc(0);
     }
-  }, [setLoanCalc, totalPrice]);
-  const handleChangeLoan = useCallback(
-    (loan: Loan) => {
-      setSelectedLoan(loan);
-      const result = (totalPrice * loan.percent) / 100;
-      setLoanCalc(result);
-    },
-    [, setSelectedLoan]
-  );
+    if (selectedLoan) {
+      setLoanCalc((totalPrice * selectedLoan?.percent) / 100);
+    }
+  }, [totalPrice]);
+
+  const handleChangeLoan = useCallback((loan: Loan) => {
+    setSelectedLoan(loan);
+    const result = (totalPrice * loan.percent) / 100;
+    setLoanCalc(result);
+  }, []);
 
   const handleNavigateToPayment = useCallback(() => {
     if (activeTab === PaymentTab.Cash && totalPrice > 1) {
@@ -68,7 +69,7 @@ export function ShoppingCardTab() {
         toast.error("your shopping cart has empty");
       }
     }
-  }, [totalPrice]);
+  }, [totalPrice, navigate, totalPrice, activeTab, selectedLoan]);
 
   return (
     <div
@@ -124,7 +125,7 @@ export function ShoppingCardTab() {
             {loanDatas.map((data, index) => (
               <div key={index} className="flex justify-center  pt-3  ">
                 <div className="flex gap-2 ">
-                  <div className="flex     ">
+                  <div className="flex">
                     <CheckBox
                       value={data}
                       checked={data.month === selectedLoan?.month}

@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import { AddProductForm, addProductYup } from "../validators/addProduct";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { useCallback, useState } from "react";
+import { useMediaQuery } from "../hooks/mediaQueryHooks";
 
 export type AddProductInputProps = {
   onAddProduct: (data: any) => void;
@@ -12,6 +13,8 @@ export type AddProductInputProps = {
 
 export function AddProductInput(props: AddProductInputProps) {
   const { onAddProduct, visible, handleCloseModal } = props;
+
+  const isMd = useMediaQuery("(max-width:768px)");
 
   const { control, handleSubmit } = useForm<AddProductForm>({
     defaultValues: {
@@ -34,10 +37,10 @@ export function AddProductInput(props: AddProductInputProps) {
         visible={!visible}
         onclose={handleCloseModal}
       />
-      <div className="px-20 py-9">
+      <div className="lg:px-20 py-9">
         <form
           onSubmit={handleSubmit(onAddProduct)}
-          className="flex flex-col gap-5"
+          className="flex flex-col gap-5  md:justify-center md:items-center"
         >
           <Controller
             name="title"
@@ -52,7 +55,7 @@ export function AddProductInput(props: AddProductInputProps) {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    style={{ width: 358 }}
+                    style={{ width: isMd ? "264px" : 358 }}
                   />
                   {fieldState.isTouched && fieldState?.error?.message ? (
                     <p
@@ -85,7 +88,7 @@ export function AddProductInput(props: AddProductInputProps) {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    style={{ width: 358 }}
+                    style={{ width: isMd ? "264px" : 358 }}
                   />
                   {fieldState.isTouched && fieldState?.error?.message ? (
                     <p
@@ -116,7 +119,7 @@ export function AddProductInput(props: AddProductInputProps) {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    style={{ width: 358 }}
+                    style={{ width: isMd ? "264px" : 358 }}
                   />
                   {fieldState.isTouched && fieldState?.error?.message ? (
                     <p
@@ -147,7 +150,7 @@ export function AddProductInput(props: AddProductInputProps) {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    style={{ width: 358 }}
+                    style={{ width: isMd ? "264px" : 358 }}
                   />
                   {fieldState.isTouched && fieldState?.error?.message ? (
                     <p
@@ -179,7 +182,7 @@ export function AddProductInput(props: AddProductInputProps) {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    style={{ width: 358 }}
+                    style={{ width: isMd ? "264px" : 358 }}
                   />
                   {fieldState.isTouched && fieldState?.error?.message ? (
                     <p
@@ -197,13 +200,17 @@ export function AddProductInput(props: AddProductInputProps) {
               );
             }}
           />
-          <div className="flex m-auto gap-4">
-            <button className="border  border-[#FE5B3A] text-[#FE5B3A] w-[171px] h-[43px] leading-5 text-base font-normal rounded-md ">
+          <div className="flex m-auto gap-4 max-sm:gap-1.5">
+            <button
+              className="border  border-[#FE5B3A] text-[#FE5B3A] lg:w-[171px] md:h-[43px] md:w-[130px] max-sm:w-[130px] max-sm:h-[43px]
+            leading-5 text-base font-normal rounded-md "
+            >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-[#FE5B3A] rounded-md w-[171px] h-[43px] leading-5 text-base font-normal text-white"
+              className="bg-[#FE5B3A] rounded-md  leading-5 text-base font-normal text-white
+               max-sm:w-[130px] max-sm:h-[43px] lg:w-[171px] md:h-[43px] md:w-[130px]"
             >
               Add Product
             </button>

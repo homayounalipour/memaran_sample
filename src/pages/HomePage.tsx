@@ -12,6 +12,7 @@ import { TGuard, WithGuard } from "../component/hoc/WithGuard";
 import { Sorting } from "../webServices/products";
 import { Link } from "react-router-dom";
 import { TCategories } from "../webServices/categories";
+import { useMediaQuery } from "../hooks/mediaQueryHooks";
 
 function HomePage() {
   const { init } = useInitApp();
@@ -31,22 +32,28 @@ function HomePage() {
     dispatchGetProducts(query);
   }, [query?.category, query?.sort]);
 
+  const isSm = useMediaQuery("(max-width:767px)");
+
   return (
-    <Layout loading={init.loading}>
-      <div className="pt-3">
-        <img src={Banner} alt="Banner" />
+    <Layout loading={init.loading} hasFooter>
+      <div className="pt-3 max-sm:p-3">
+        <img
+          src={Banner}
+          alt="Banner"
+          style={{ borderRadius: isSm ? 10 : 0 }}
+        />
       </div>
-      <div className="pt-6 px-36">
-        <div className="flex flex-row gap-7 items-center ">
+      <div className="lg:pt-6 lg:px-36">
+        <div className="flex flex-row md:gap-7 items-center gap-3 max-sm:px-4">
           <span className="flex text-base font-medium leading-5 gap-2">
             <HiSortDescending size={23} />
             sorting:
           </span>
-          <div className="flex flex-row justify-center items-center gap-8">
+          <div className="flex flex-row  items-center gap-3 md:gap-8">
             <Link
               to={`/home?sort=${Sorting.Ascending}`}
               className={`hover:text-[#6F11E1] hover:font-medium 
-            cursor-pointer flex flex-row text-sm leading-4 font-normal  ${
+            cursor-pointer flex flex-row text-sm leading-4 font-normal   ${
               query?.sort &&
               query?.sort === Sorting.Ascending &&
               "text-[#6F11E1]"

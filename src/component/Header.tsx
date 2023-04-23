@@ -16,6 +16,8 @@ export function Header() {
   const { query } = useLocationQuery<{ category: TCategories }>();
 
   const navigate = useNavigate();
+
+
   useEffect(() => {
     dispatchGetCategories();
   }, []);

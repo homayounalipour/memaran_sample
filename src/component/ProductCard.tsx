@@ -42,7 +42,7 @@ export function ProductCard(props: ProductsListProps) {
         product={product}
         onAddToCard={onAddToCard}
       />
-      <div className="pb-2  grid grid-cols-4">
+      <div className="pb-2 grid grid-cols-4 bg">
         <div
           onClick={handleShowModal}
           className="w-[18vw] relative rounded-xl px-1 pt-2 shadow-md hover:bg-[#EAD9FF]

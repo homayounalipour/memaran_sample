@@ -5,7 +5,7 @@ export function CardList() {
   const { cart, dispatchIncreaseCart, dispatchDecreaseCart } = useCart();
 
   return (
-    <div className={`${cart ? "h-full" : "h-[286px]"}`}>
+    <div className={`  max-sm:w-[298px] `}>
       {cart.map((product) => (
         <CardItem
           key={product.product.id}

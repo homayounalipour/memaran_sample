@@ -2,12 +2,7 @@ import React from "react";
 import { Logo } from "../assets/images/index";
 import { Link } from "react-router-dom";
 
-export type LogoAppProps = {
-  className?: string;
-};
-
-export function LogoApp(props: LogoAppProps) {
-  const { className } = props;
+export function LogoApp() {
   return (
     <Link to="/home">
       <div className="flex flex-row items-center">
@@ -24,7 +19,7 @@ export function LogoApp(props: LogoAppProps) {
         >
           shop
         </p>
-      </div>{" "}
+      </div>
     </Link>
   );
 }

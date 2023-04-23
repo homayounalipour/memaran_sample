@@ -33,6 +33,11 @@ export const removeCartItem = (id: string) => ({
   id,
 });
 
+export const CLEAR_CART_STATE = "CLEAR_CART_STATE";
+export const clearCartState = () => ({
+  type: CLEAR_CART_STATE,
+});
+
 export type CartState = {
   cart: CartItem[];
   totalPrice: number;
@@ -123,6 +128,8 @@ export const cartReducer = (
           : state.totalPrice,
       };
     }
+    case CLEAR_CART_STATE:
+      return cartInitialState;
     default:
       return state;
   }
@@ -161,6 +168,10 @@ export function useCart() {
     },
     [dispatch]
   );
+  const dispatchClearCartState = useCallback(() => {
+    dispatch(clearCartState());
+    toast.success("cart has been removed");
+  }, [dispatch]);
 
   return {
     cart,
@@ -169,5 +180,6 @@ export function useCart() {
     dispatchIncreaseCart,
     dispatchDecreaseCart,
     dispatchRemoveCart,
+    dispatchClearCartState,
   };
 }

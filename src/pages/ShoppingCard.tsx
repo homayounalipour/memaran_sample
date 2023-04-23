@@ -15,20 +15,22 @@ function ShoppingCard(props: ShoppingCardProp) {
 
   return (
     <Layout>
-      <div className="px-36 pt-8">
+      <div className="lg:px-36 max-sm:px-8 pt-8">
         <span className="font-medium text-base leading-5">Shopping Cart</span>
       </div>
       <div>
-        <div className="grid grid-cols-3  px-36 pt-8 gap-2 ">
-          <div className={`col-span-2 h-full rounded-lg shadow-lg `}>
+        <div className="lg:grid lg:grid-cols-3  lg:px-36 pt-8 gap-2">
+          <div
+            className={`col-span-2 h-full rounded-lg shadow-lg max-sm:flex max-sm:flex-col max-sm:items-center gap-1`}
+          >
             <div
-              className=" border bg-[#E4E4E4] h-[9vh] rounded-t-md flex justify-between items-center px-16
+              className=" border bg-[#E4E4E4] h-[9vh]  max-sm:w-[299px] rounded-t-md flex justify-between items-center px-14 md:px-16
           font-medium leading-5 text-base"
             >
-              <span>Product details</span>
-              <span>Name</span>
-              <span>price</span>
-              <span>Total</span>
+              <span className="">Product details</span>
+              <span className="md:flex hidden">Name</span>
+              <span className="md:flex hidden">price</span>
+              <span className="md:flex hidden">Total</span>
             </div>
             <CardList />
           </div>
