@@ -5,7 +5,7 @@ import { truncate } from "../utils/truncate";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { TProduct } from "../webServices/products";
 import { ProductDetailModal } from "./ProductDetailModal";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 export type ProductsListProps = {
   product: TProduct;

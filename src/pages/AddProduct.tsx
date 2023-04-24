@@ -2,7 +2,7 @@ import { Layout } from "../kit/Layout";
 import { AddProductInput } from "../component/AddProductInput";
 import { TGuard, WithGuard } from "../component/hoc/WithGuard";
 import { useAddProduct } from "../store/modules/product/addProduct";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { AddProductForm } from "../webServices/products";
 
 function AddProduct() {

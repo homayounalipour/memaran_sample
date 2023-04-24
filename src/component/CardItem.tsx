@@ -1,6 +1,6 @@
 import { HiMinusCircle } from "react-icons/hi";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import { CartItem, useCart } from "../store/modules/cart/cart";
+import { CartItem } from "../store/modules/cart/cart";
 import { useMediaQuery } from "../hooks/mediaQueryHooks";
 import { Hr } from "../kit/Hr";
 

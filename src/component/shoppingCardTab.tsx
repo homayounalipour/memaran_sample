@@ -1,6 +1,6 @@
 import { CheckBox } from "../kit/CheckBox";
 import { Hr } from "../kit/Hr";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Tabs } from "./Tabs";
 import { Tab } from "./Tab";
 import { useNavigate } from "react-router-dom";

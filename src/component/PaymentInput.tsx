@@ -2,16 +2,8 @@ import TextField from "@mui/material/TextField";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { AddProductForm, addProductYup } from "../validators/addProduct";
 import { PaymentForm, PaymentYup } from "../validators/payment";
-import { useCart } from "../store/modules/cart/cart";
 import { useMediaQuery } from "../hooks/mediaQueryHooks";
-
-export type PaymentProps = {
-  onAddProduct?: (data: any) => void;
-  handleCloseModal?: () => void;
-  handleCheckOutPayment?: () => void;
-};
 
 export function PaymentInput() {
   const [showModal, setShowModal] = useState(false);
