@@ -65,8 +65,6 @@ export function ShoppingCardTab() {
     } else {
       if (activeTab === PaymentTab.Loan && selectedLoan && totalPrice > 1) {
         navigate("/payment");
-      } else {
-        toast.error("your shopping cart has empty");
       }
     }
   }, [totalPrice, navigate, totalPrice, activeTab, selectedLoan]);
@@ -123,8 +121,11 @@ export function ShoppingCardTab() {
         <Tab tab={PaymentTab.Loan}>
           <>
             {loanDatas.map((data, index) => (
-              <div key={index} className="flex justify-center  pt-3  ">
-                <div className="flex gap-2 ">
+              <div
+                key={index}
+                className="md:flex md:justify-center  max-sm:px-14 pt-3  "
+              >
+                <div className="flex gap-2  ">
                   <div className="flex">
                     <CheckBox
                       value={data}
@@ -159,11 +160,13 @@ export function ShoppingCardTab() {
                 {selectedLoan && (
                   <>
                     <div className="py-8 flex gap-8 relative">
-                      <div className="border-[10px] flex  items-center rounded-full w-[100px] h-[100px]">
-                        <span className="  absolute bottom-12 ">
+                      <div
+                        className={`border-[10px] flex  items-center rounded-full w-[100px] h-[100px] border-[#6F11E1]`}
+                      >
+                        <span className="  absolute bottom-12 left-4">
                           {totalPrice.toFixed(3)}
                         </span>
-                        <span className="absolute top-12 left-10">
+                        <span className="absolute top-12 left-7">
                           ${loanCalc?.toFixed(3)}
                         </span>
                       </div>

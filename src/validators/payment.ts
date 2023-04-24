@@ -12,11 +12,11 @@ export type PaymentForm = {
 
 export const PaymentSchema = () =>
   yup.object({
-      cardNumber: validator.string(true),
-      cvv2: validator.string(true),
-      year: validator.string(true),
-      month: validator.url(true),
-      ePass: validator.url(true),
+    cardNumber: validator.beNumber(),
+    cvv2: validator.beNumber(),
+    year: validator.beNumber(),
+    month: validator.beNumber(),
+    ePass: validator.beNumber(),
   });
 
 export const PaymentYup = () => yupResolver(PaymentSchema());

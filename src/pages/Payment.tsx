@@ -11,11 +11,11 @@ function Payment() {
   return (
     <Layout hasFooter={false}>
       <div className="pt-8 pb-4 flex justify-center">
-        <div className="md:w-[38vw] xl:w-[34vw] border rounded-lg flex py-8 flex gap-12 px-10 max-sm:w-[301px]  justify-start  ">
+        <div className="md:w-[38vw] xl:w-[38vw] border rounded-lg flex py-8 flex gap-12 px-10 max-sm:w-[301px]  justify-start  ">
           <span className="flex leading-5 text-base font-bold">
             Total Amount:
           </span>
-          <span className="flex leading-5 text-base font-medium ">
+          <span className="flex leading-5 text-base font-medium max-sm:text-sm ">
             $ {totalPrice.toFixed(3)}
           </span>
         </div>

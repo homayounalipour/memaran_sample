@@ -39,7 +39,7 @@ export function ConfirmationModal(props: AddProductModalProps) {
       }}
     >
       <div
-        className="rounded-md  lg:w-[34vw] flex justify-center flex-col pt-3 max-sm:w-[291px] md:w-[380px]"
+        className="rounded-md   lg:w-[34vw] flex justify-center flex-col pt-3 max-sm:w-[291px] md:w-[380px]"
         style={{
           background: payment ? "#E8FFE4" : "white",
         }}
@@ -66,16 +66,15 @@ export function ConfirmationModal(props: AddProductModalProps) {
           <div className="flex flex-row  md:px-10 py-8  max-sm:block">
             <div className="pr-4 md:w-full  aspect-w-12 aspect-h-4 max-sm:aspect-w-16 max-sm:aspect-h-5">
               <img
-                className="w-full h-full object-center rounded-lg max-sm:px-12 max-sm:rounded-lg"
+                className="w-full h-full object-center rounded-lg max-sm:px-10 max-sm:rounded-lg"
                 src={confirmProduct?.image}
                 alt={confirmProduct?.image}
                 width="132px"
                 height="95px"
-                // style={{ width: 132, height: 95 }}
               />
             </div>
             <div className="flex flex-col pl-3 max-sm:px-10 max-sm:py-4">
-              <span className="font-medium text-base leading-5 pb-5">
+              <span className="font-medium text-base leading-5 pb-5 max-sm:text-sm">
                 {confirmProduct?.title}
               </span>
               <span className="font-normal text-xs w-[18vw] leading-4 pb-2 max-sm:w-full">

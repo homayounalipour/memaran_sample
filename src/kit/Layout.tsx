@@ -14,7 +14,7 @@ export function Layout(props: LayoutProps) {
     <AppLoading />
   ) : (
     <>
-      <div className="md:block max-sm:hidden">
+      <div className="lg:block hidden">
         <Header />
       </div>
       <MobileHeader />

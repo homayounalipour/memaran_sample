@@ -2,7 +2,6 @@ import { Controller, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { AddProductForm, addProductYup } from "../validators/addProduct";
 import { ConfirmationModal } from "./ConfirmationModal";
-import { useCallback, useState } from "react";
 import { useMediaQuery } from "../hooks/mediaQueryHooks";
 
 export type AddProductInputProps = {
@@ -38,10 +37,7 @@ export function AddProductInput(props: AddProductInputProps) {
         onclose={handleCloseModal}
       />
       <div className="lg:px-20 py-9">
-        <form
-          onSubmit={handleSubmit(onAddProduct)}
-          className="flex flex-col gap-5  md:justify-center md:items-center"
-        >
+        <form className="flex flex-col gap-5  md:justify-center md:items-center">
           <Controller
             name="title"
             control={control}
@@ -202,12 +198,14 @@ export function AddProductInput(props: AddProductInputProps) {
           />
           <div className="flex m-auto gap-4 max-sm:gap-1.5">
             <button
+              onClick={(e) => e.preventDefault()}
               className="border  border-[#FE5B3A] text-[#FE5B3A] lg:w-[171px] md:h-[43px] md:w-[130px] max-sm:w-[130px] max-sm:h-[43px]
             leading-5 text-base font-normal rounded-md "
             >
               Cancel
             </button>
             <button
+              onClick={handleSubmit(onAddProduct)}
               type="submit"
               className="bg-[#FE5B3A] rounded-md  leading-5 text-base font-normal text-white
                max-sm:w-[130px] max-sm:h-[43px] lg:w-[171px] md:h-[43px] md:w-[130px]"

@@ -14,8 +14,6 @@ export type ProductsListProps = {
 export function ProductCard(props: ProductsListProps) {
   const { product, onAddToCard } = props;
 
-  console.log(product.rating.count, "rate count ,,,,,,,,");
-
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = useCallback(() => {
@@ -42,10 +40,10 @@ export function ProductCard(props: ProductsListProps) {
         product={product}
         onAddToCard={onAddToCard}
       />
-      <div className="pb-2 grid grid-cols-4 bg">
+      <div className="pb-2 md:grid md:grid-cols-4  max-sm:px-2  md:px-3 lg:px-0 ">
         <div
           onClick={handleShowModal}
-          className="w-[18vw] relative rounded-xl px-1 pt-2 shadow-md hover:bg-[#EAD9FF]
+          className="lg:w-[18vw] md:w-[22vw]  max-sm:w-[145px] max-sm:h-full relative rounded-xl px-1 pt-2 shadow-md hover:bg-[#EAD9FF]
              cursor-pointer group overflow-hidden"
         >
           <div className="flex items-center flex-col h-full ">
@@ -56,7 +54,7 @@ export function ProductCard(props: ProductsListProps) {
                 alt={product.image}
               />
             </div>
-            <div className="px-1 py-3 flex gap-14">
+            <div className="px-1 py-3 flex xl:gap-14 max-sm:gap-1 max-sm:flex-col max-sm:items-center md:flex-col xl:flex-row md:items-center">
               <Chip
                 label={product.category}
                 style={{
@@ -71,16 +69,16 @@ export function ProductCard(props: ProductsListProps) {
               />
               <Rating name="half-rating" value={+product.rating.rate} />
             </div>
-            <span className="pl-2 font-medium leading-5 text-base">
+            <span className="pl-2 font-medium leading-5 text-base max-sm:text-xs">
               {truncate(product.title, 50)}
             </span>
             <div className="w-[17.5vw] py-3">
               <Hr />
             </div>
-            <span className="text-sm text-[#737373] leading-1 px-2 font-normal ">
+            <span className="text-sm text-[#737373] leading-1 px-2 font-normal max-sm:text-[10px] ">
               {truncate(product.description, 100)}
             </span>
-            <div className=" flex justify-between gap-32 py-5 mt-auto">
+            <div className=" flex justify-between xl:gap-32 max-sm:gap-6 lg:gap-10 md:gap-6 py-5 mt-auto">
               <span className="flex items-center">${product.price}</span>
               <button type="button">
                 <HiOutlineShoppingBag

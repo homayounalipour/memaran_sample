@@ -9,13 +9,11 @@ import { useMediaQuery } from "../hooks/mediaQueryHooks";
 
 export type PaymentProps = {
   onAddProduct?: (data: any) => void;
-  visible?: boolean;
   handleCloseModal?: () => void;
   handleCheckOutPayment?: () => void;
 };
 
-export function PaymentInput(props: PaymentProps) {
-  const { visible } = props;
+export function PaymentInput() {
   const [showModal, setShowModal] = useState(false);
 
   const { control, handleSubmit } = useForm<PaymentForm>({
@@ -63,6 +61,7 @@ export function PaymentInput(props: PaymentProps) {
                     {...field}
                     id="cardNumber"
                     label="Card Number"
+                    type="number"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -103,6 +102,7 @@ export function PaymentInput(props: PaymentProps) {
                     {...field}
                     id="cvv2"
                     label="cvv2"
+                    type="number"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -132,84 +132,74 @@ export function PaymentInput(props: PaymentProps) {
               );
             }}
           />
-          <Controller
-            name="year"
-            control={control}
-            render={({ field, fieldState }) => {
-              return (
-                <>
-                  <TextField
-                    {...field}
-                    id="year"
-                    label="year"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      style: {
-                        // background: "red",
-                        marginLeft: 80,
-                        marginRight: 50,
-                      },
-                    }}
-                    inputMode="numeric"
-                    style={{ width: isSm ? "264px" : 358, paddingBottom: 15 }}
-                  />
-                  {fieldState.isTouched && fieldState?.error?.message ? (
-                    <p
-                      style={{
-                        fontSize: 12,
-                        color: "red",
-                        paddingTop: 10,
-                        paddingBottom: 10,
+          <div className="md:flex md:gap-4 max-sm:px-5">
+            <Controller
+              name="year"
+              control={control}
+              render={({ field, fieldState }) => {
+                return (
+                  <>
+                    <TextField
+                      {...field}
+                      id="year"
+                      label="year"
+                      type="number"
+                      InputLabelProps={{
+                        shrink: true,
                       }}
-                    >
-                      {fieldState.error.message}
-                    </p>
-                  ) : null}
-                </>
-              );
-            }}
-          />
-          <Controller
-            name="month"
-            control={control}
-            render={({ field, fieldState }) => {
-              return (
-                <>
-                  <TextField
-                    {...field}
-                    id="month"
-                    label="month"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    inputProps={{
-                      style: {
-                        // background: "red",
-                        marginLeft: 80,
-                        marginRight: 50,
-                      },
-                    }}
-                    inputMode="numeric"
-                    style={{ width: isSm ? "264px" : 358, paddingBottom: 15 }}
-                  />
-                  {fieldState.isTouched && fieldState?.error?.message ? (
-                    <p
-                      style={{
-                        fontSize: 12,
-                        color: "red",
-                        paddingTop: 10,
-                        paddingBottom: 10,
+                      inputMode="numeric"
+                      style={{ width: isSm ? "264px" : 170, paddingBottom: 15 }}
+                    />
+                    {fieldState.isTouched && fieldState?.error?.message ? (
+                      <p
+                        style={{
+                          fontSize: 12,
+                          color: "red",
+                          paddingTop: 10,
+                          paddingBottom: 10,
+                        }}
+                      >
+                        {fieldState.error.message}
+                      </p>
+                    ) : null}
+                  </>
+                );
+              }}
+            />
+            <Controller
+              name="month"
+              control={control}
+              render={({ field, fieldState }) => {
+                return (
+                  <>
+                    <TextField
+                      {...field}
+                      id="month"
+                      label="month"
+                      type="number"
+                      InputLabelProps={{
+                        shrink: true,
                       }}
-                    >
-                      {fieldState.error.message}
-                    </p>
-                  ) : null}
-                </>
-              );
-            }}
-          />
+                      inputMode="numeric"
+                      style={{ width: isSm ? "264px" : 170, paddingBottom: 15 }}
+                    />
+                    {fieldState.isTouched && fieldState?.error?.message ? (
+                      <p
+                        style={{
+                          fontSize: 12,
+                          color: "red",
+                          paddingTop: 10,
+                          paddingBottom: 10,
+                        }}
+                      >
+                        {fieldState.error.message}
+                      </p>
+                    ) : null}
+                  </>
+                );
+              }}
+            />
+          </div>
           <Controller
             name="ePass"
             control={control}
@@ -220,6 +210,7 @@ export function PaymentInput(props: PaymentProps) {
                     {...field}
                     id="ePass"
                     label="E-pass"
+                    type="number"
                     InputLabelProps={{
                       shrink: true,
                     }}

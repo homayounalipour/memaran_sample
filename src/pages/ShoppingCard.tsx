@@ -2,7 +2,6 @@ import { Layout } from "../kit/Layout";
 import { ShoppingCardTab } from "../component/shoppingCardTab";
 import { TGuard, WithGuard } from "../component/hoc/WithGuard";
 import { CardList } from "../component/CardList";
-import { useCart } from "../store/modules/cart/cart";
 import { TProduct } from "../webServices/products";
 
 export type ShoppingCardProp = {
@@ -19,7 +18,7 @@ function ShoppingCard(props: ShoppingCardProp) {
         <span className="font-medium text-base leading-5">Shopping Cart</span>
       </div>
       <div>
-        <div className="lg:grid lg:grid-cols-3  lg:px-36 pt-8 gap-2">
+        <div className="lg:grid lg:grid-cols-3 lg:px-36 pt-8 gap-2">
           <div
             className={`col-span-2 h-full rounded-lg shadow-lg max-sm:flex max-sm:flex-col max-sm:items-center gap-1`}
           >

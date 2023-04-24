@@ -29,4 +29,13 @@ export const validator = {
           .min(8, "error.passLength")
           .required("error.PasswordFieldRequired")
       : Yup.string().min(8, "error.passLength"),
+  beNumber: () =>
+    Yup.string()
+      .test("error.beNumber", "error.mustBeNumber", (val) => {
+        if (!val) {
+          return false;
+        }
+        return !isNaN(Number(val));
+      })
+      .required("error.Required"),
 };

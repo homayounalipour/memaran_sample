@@ -46,17 +46,17 @@ export function CardItem(props: CardItemProps) {
               </div>
             </div>
             <div className="py-2">
-              <Hr className="" />
+              <Hr />
             </div>
             <div className="flex flex-col pt-3  ">
               <div className=" flex justify-between items-center ">
                 <span>Name</span>
-                <span className=" font-medium leading-5 text-sm">
+                <span className=" font-medium leading-5 xl:text-base text-sm max-sm:text-xs max-sm:leading-3">
                   {product.title}
                 </span>
               </div>
               <div className="py-2">
-                <Hr className="" />
+                <Hr />
               </div>
               <div className=" flex justify-between items-center">
                 <span>price</span>
@@ -65,7 +65,7 @@ export function CardItem(props: CardItemProps) {
                 </span>
               </div>
               <div className="py-2">
-                <Hr className="" />
+                <Hr />
               </div>
               <div className=" flex justify-between items-center">
                 <span>Total</span>

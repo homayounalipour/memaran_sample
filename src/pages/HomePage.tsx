@@ -43,8 +43,8 @@ function HomePage() {
           style={{ borderRadius: isSm ? 10 : 0 }}
         />
       </div>
-      <div className="lg:pt-6 lg:px-36">
-        <div className="flex flex-row md:gap-7 items-center gap-3 max-sm:px-4">
+      <div className="lg:pt-6 lg:px-36 ">
+        <div className="flex flex-row md:gap-7 items-center md:px-10 md:py-2 gap-3 max-sm:px-4">
           <span className="flex text-base font-medium leading-5 gap-2">
             <HiSortDescending size={23} />
             sorting:
@@ -77,7 +77,7 @@ function HomePage() {
         <div className="mt-2">
           <Hr />
         </div>
-        <div className="pt-2 grid grid-cols-4">
+        <div className="pt-2 md:grid md:grid-cols-4 max-sm:grid grid-cols-2">
           <ProductsList products={products} loading={productsLoading} />
         </div>
       </div>
